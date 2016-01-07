@@ -5,7 +5,7 @@ function testIfStable(arraySize) {
         result,
         isStable = false,
         sortedCopy = originalArray.slice().sort(function (a, b) {
-            return a.keyToSortBy - b.keyToSortBy
+            return a.keyToSortBy - b.keyToSortBy;
         });
 
     isStable = checkIfStable(originalArray, sortedCopy);
