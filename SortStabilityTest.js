@@ -1,4 +1,4 @@
-var specialDuplicateKey = 1;
+var SPECIAL_DUPLICATE_KEY = 1;
 
 function testIfStable(arraySize) {
     var originalArray = generateTestArray(arraySize),
@@ -13,10 +13,13 @@ function testIfStable(arraySize) {
 
 function appendResultsToHtml(arraySize, result) {
     var listWithResults = document.getElementById('results'),
-        elementToappend = document.createElement('li');
-    elementToappend.textContent = 'array size: ' + arraySize + ' -- sort type: ' + (result ? 'Stable' : 'Unstable');
+        span = document.createElement('span'),
+        listItem = document.createElement('li');
+        listItem.appendChild(span)
 
-    listWithResults.appendChild(elementToappend)
+    span.textContent = 'array size: ' + arraySize + ' -- sort type: ' + (result ? 'Stable' : 'Unstable');
+
+    listWithResults.appendChild(listItem)
 }
 
 function printArrays(originalArray, sortedCopy) {
@@ -32,7 +35,7 @@ function checkIfStable(originalArray, sortedCopy) {
         sortedItem = sortedCopy[i];
         originalItem = originalArray[i];
 
-        if (sortedItem.keyToSortBy === originalItem.keyToSortBy && sortedItem.keyToSortBy === specialDuplicateKey) {
+        if (sortedItem.keyToSortBy === originalItem.keyToSortBy && sortedItem.keyToSortBy === SPECIAL_DUPLICATE_KEY) {
             if (sortedItem.index < originalItem.index) {
                 return false;
             }
@@ -48,7 +51,7 @@ function generateTestArray(arraySize) {
 
     for (var i = 0; i < arraySize; i++) {
         testObject = {};
-        testObject.keyToSortBy = i % 3 === 0 ? i : specialDuplicateKey;
+        testObject.keyToSortBy = i % 3 === 0 ? i : SPECIAL_DUPLICATE_KEY;
         testObject.index = i;
 
         arrayToTest.push(testObject);
