@@ -2,22 +2,33 @@ var SPECIAL_DUPLICATE_KEY = 1;
 
 function testIfStable(arraySize) {
     var originalArray = generateTestArray(arraySize),
+        result,
         isStable = false,
         sortedCopy = originalArray.slice().sort(function (a, b) {
             return a.keyToSortBy - b.keyToSortBy
         });
 
     isStable = checkIfStable(originalArray, sortedCopy);
-    appendResultsToHtml(arraySize, isStable)
+    result = getResultAsString(arraySize, isStable);
+
+    if (typeof document !== 'undefined') {
+        appendResultsToHtml(result);
+    }
+
+    console.log(result);
 }
 
-function appendResultsToHtml(arraySize, result) {
+function getResultAsString(arraySize, isStable){
+    return 'array size: ' + arraySize + ' -- sort type: ' + (isStable ? 'Stable' : 'Unstable');
+}
+
+function appendResultsToHtml(result) {
     var listWithResults = document.getElementById('results'),
         span = document.createElement('span'),
         listItem = document.createElement('li');
-        listItem.appendChild(span)
+    listItem.appendChild(span)
 
-    span.textContent = 'array size: ' + arraySize + ' -- sort type: ' + (result ? 'Stable' : 'Unstable');
+    span.textContent = result;
 
     listWithResults.appendChild(listItem)
 }
