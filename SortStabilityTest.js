@@ -4,9 +4,7 @@ function testIfStable(arraySize) {
     var originalArray = generateTestArray(arraySize),
         result,
         isStable = false,
-        sortedCopy = originalArray.slice().sort(function (a, b) {
-            return a.keyToSortBy - b.keyToSortBy;
-        });
+        sortedCopy = originalArray.slice().sort((a, b) => a.keyToSortBy - b.keyToSortBy);
 
     isStable = checkIfStable(originalArray, sortedCopy);
     result = getResultAsString(arraySize, isStable);
@@ -18,7 +16,7 @@ function testIfStable(arraySize) {
     console.log(result);
 }
 
-function getResultAsString(arraySize, isStable){
+function getResultAsString(arraySize, isStable) {
     return 'array size: ' + arraySize + ' -- sort type: ' + (isStable ? 'Stable' : 'Unstable');
 }
 
